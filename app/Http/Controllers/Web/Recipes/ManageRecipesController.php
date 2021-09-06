@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Recipes;
 
+use App\Actions\AllRecipesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\RecipeRequest;
 use App\Models\Recipe;
@@ -16,14 +17,9 @@ class ManageRecipesController extends Controller
         $this->authorizeResource(Recipe::class);
     }
 
-    public function index(Recipe $recipe): InertiaResponse
+    public function index(AllRecipesAction $action): InertiaResponse
     {
-        $recipes = $recipe->newQuery()
-            ->select('id', 'title', 'author_id')
-            ->orderByDesc('id')
-            ->with('author:id,name')
-            ->get();
-
+        $recipes = $action->execute();
         return Inertia::render('Recipes/Manage/Index', compact('recipes'));
     }
 

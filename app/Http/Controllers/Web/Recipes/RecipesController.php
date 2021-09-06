@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Recipes;
 
+use App\Actions\UserRecipesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\RecipeRequest;
 use App\Models\Recipe;
@@ -13,18 +14,11 @@ use Inertia\Response as InertiaResponse;
 
 class RecipesController extends Controller
 {
-    public function __invoke(Request $request, Recipe $recipe): InertiaResponse
+    public function __invoke(UserRecipesAction $action): InertiaResponse
     {
         $this->authorize('viewAny', Recipe::class);
 
-        /** @var User $user */
-        $user = $request->user();
-        $recipes = $user->recipes()
-            ->select('id', 'title', 'author_id', 'created_at')
-            ->orderByDesc('id')
-            ->get();
-
-        $recipes->append('published_at');
+        $recipes = $action->execute();
 
         return Inertia::render('Recipes/Index', compact('recipes'));
     }

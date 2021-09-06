@@ -4,6 +4,8 @@ use App\Http\Controllers\Web\Dashboards\AdminsDashboardController;
 use App\Http\Controllers\Web\Dashboards\EditorsDashboardController;
 use App\Http\Controllers\Web\Dashboards\UsersDashboardController;
 use App\Http\Controllers\Web\Invitations\InvitationsController;
+use App\Http\Controllers\Web\Landing\LandingPageController;
+use App\Http\Controllers\Web\Recipes\ShowRecipePubliclyController;
 use App\Http\Controllers\Web\Recipes\ManageRecipesController;
 use App\Http\Controllers\Web\Recipes\RecipesController;
 use App\Http\Controllers\Web\Reports\AdminsReportsController;
@@ -13,25 +15,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', LandingPageController::class)->name('home');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('Public/recipes/{recipe}', ShowRecipePubliclyController::class)->name('recipes.public.show');
 
 require __DIR__.'/auth.php';
 

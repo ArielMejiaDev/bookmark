@@ -10,13 +10,13 @@ class RecipeFactory extends Factory
 {
     protected $model = Recipe::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'title' => $this->faker->text(30),
             'slug' => $this->faker->slug,
             'content' => $this->faker->realText,
-            'thumbnail' => $this->faker->imageUrl,
+            'thumbnail' => 'https://source.unsplash.com/random?desserts',
             'author_id' => User::factory(),
         ];
     }

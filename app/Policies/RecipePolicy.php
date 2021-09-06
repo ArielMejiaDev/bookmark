@@ -10,9 +10,14 @@ class RecipePolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
+    }
+
+    public function view(User $user, Recipe $recipe): bool
+    {
+        return $user->isAdmin() || $user->isEditor() || $user->id === $recipe->author_id;
     }
 
     public function create(User $user): bool
