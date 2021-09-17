@@ -52,7 +52,7 @@
                                 <tr style="margin: 5px; display: block; border-radius: 8px; background-color: #93c5fd; padding: 5px;">
                                     <td class="sm-px-24" style="border-radius: 4px; background-color: #ffffff; padding: 48px; text-align: left; font-size: 16px; line-height: 24px; color: #1f2937;">
                                         <a href="https://www.decisionlink.com/" style="margin-bottom: 60px; display: block;">
-                                            <img src="images/logo.png" width="150" alt="Decision Link" style="max-width: 100%; vertical-align: middle; line-height: 100%; border: 0; margin-left: -10px;">
+                                            <img src="https://raw.githubusercontent.com/ArielMejiaDev/bookmark/master/public/images/logo.png" width="150" alt="Decision Link" style="max-width: 100%; vertical-align: middle; line-height: 100%; border: 0; margin-left: -10px;">
                                         </a>
                                         <p class="sm-leading-32" style="margin: 0; margin-bottom: 24px; font-size: 24px; font-weight: 700; letter-spacing: -0.05em; color: #000000;">Value Prop Shared</p>
                                         <p>Hi {{ $receiver['name'] }},</p>
