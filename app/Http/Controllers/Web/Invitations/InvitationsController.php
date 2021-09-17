@@ -38,7 +38,11 @@ class InvitationsController extends Controller
             $user = User::query()->create($newUserData);
             $user->markEmailAsVerified();
 
-            $loginUrl = URL::signedRoute('editors.login.create', ['id' => $user->id]);
+            $loginUrl = URL::temporarySignedRoute(
+                'editors.login.create',
+                now()->addMinutes(30) , // change for expiration date
+                ['id' => $user->id]
+            );
 
             Mail::to($user)->send(
                 (new UserInvitationMail($request->user(), $user, $password, $loginUrl))
