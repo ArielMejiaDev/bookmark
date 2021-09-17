@@ -22,10 +22,10 @@
                         {{ status }}
                     </div>
 
-                    <div>
-                        <label class="block text-gray-700" for="email">Email Address</label>
-                        <input type="email" v-model="form.email" name="email" id="email" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus required autocomplete="username" />
-                    </div>
+<!--                    <div>-->
+<!--                        <label class="block text-gray-700" for="email">Email Address</label>-->
+<!--                        <input type="email" v-model="form.email" name="email" id="email" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus required autocomplete="username" />-->
+<!--                    </div>-->
 
                     <div class="mt-4">
                         <label class="block text-gray-700" for="password">Password</label>
@@ -80,8 +80,8 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                email: 'editor@mail.com',
-                password: 'password',
+                id: null,
+                password: '',
                 remember: false
             })
         }
@@ -93,6 +93,11 @@ export default {
                 onFinish: () => this.form.reset('password'),
             })
         }
+    },
+
+    created() {
+        const urlParams = new URLSearchParams(window.location.search);
+        this.form.id = urlParams.get('id');
     }
 }
 </script>

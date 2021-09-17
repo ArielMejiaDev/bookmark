@@ -21,7 +21,7 @@ class UserRecipesAction
         $user = $this->request->user();
 
         $recipes = $user->recipes()
-            ->select('id', 'title', 'author_id', 'created_at')
+            ->select('id', 'title', 'content', 'author_id', 'created_at')
             ->orderByDesc('id')
             ->get();
 
