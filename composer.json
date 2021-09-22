@@ -17,14 +17,15 @@
     "require-dev": {
         "arielmejiadev/json-api-auth": "^1.0",
         "barryvdh/laravel-ide-helper": "^2.10",
-        "tutorigo/laravel-ide-macros": "*",
+        "brianium/paratest": "^6.3",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.4",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "tutorigo/laravel-ide-macros": "*"
     },
     "autoload": {
         "psr-4": {

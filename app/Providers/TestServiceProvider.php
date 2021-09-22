@@ -14,7 +14,11 @@ class TestServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        /** @return \Illuminate\Testing\TestResponse @instantiated */
+        /**
+         * Assert that the json response match exactly with a given resource.
+         * @return \Illuminate\Testing\TestResponse
+         * @instantiated
+         */
         \Illuminate\Testing\TestResponse::macro('assertResource', function (\Illuminate\Http\Resources\Json\JsonResource $resource) {
             $resource = ['data' => json_decode($resource->toJson(), 1)];
             /** @var \Illuminate\Testing\TestResponse $this */

@@ -111,17 +111,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-        return (int) $this->role_id === self::ADMIN_TYPE_ID;
+        return $this->role->description === 'Admin';
     }
 
     public function isEditor(): bool
     {
-        return (int) $this->role_id === self::EDITOR_TYPE_ID;
+        return $this->role->description === 'Editor';
     }
 
     public function isNormalUser(): bool
     {
-        return (int) $this->role_id === self::USER_TYPE_ID;
+        return $this->role->description === 'User';
     }
 
     public function recipes(): HasMany

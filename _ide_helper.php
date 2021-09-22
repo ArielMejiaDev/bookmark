@@ -16020,9 +16020,10 @@
                         return \Illuminate\Testing\TestResponse::inertiaPage();
         }
                     /**
-         * 
+         * Assert that the json response match exactly with a given resource.
          *
-         * @return \Illuminate\Testing\TestResponse @instantiated
+         * @return \Illuminate\Testing\TestResponse 
+         * @instantiated 
          * @see \App\Providers\TestServiceProvider::boot()
          * @param \Illuminate\Http\Resources\Json\JsonResource $resource
          * @static 

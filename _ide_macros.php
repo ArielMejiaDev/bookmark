@@ -17,7 +17,11 @@ namespace Illuminate\Testing {
         public static function inertiaPage() {
 
         }
-        /** @return \Illuminate\Testing\TestResponse @instantiated */
+        /**
+         * Assert that the json response match exactly with a given resource.
+         * @return \Illuminate\Testing\TestResponse
+         * @instantiated
+         */
         public function assertResource(Illuminate\Http\Resources\Json\JsonResource $resource) {
 
         }

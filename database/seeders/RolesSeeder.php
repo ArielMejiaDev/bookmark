@@ -9,16 +9,19 @@ class RolesSeeder extends Seeder
 {
     public function run()
     {
-        Role::factory()->create([
-            'description' => 'Admin'
-        ]);
+        $adminRoleExists = Role::query()->where('description', 'Admin')->exists();
+        if (!$adminRoleExists) {
+            Role::factory()->create(['description' => 'Admin']);
+        };
 
-        Role::factory()->create([
-            'description' => 'Editor'
-        ]);
+        $editorRoleExists = Role::query()->where('description', 'Editor')->exists();
+        if (!$editorRoleExists) {
+            Role::factory()->create(['description' => 'Editor']);
+        };
 
-        Role::factory()->create([
-            'description' => 'User'
-        ]);
+        $userRoleExists = Role::query()->where('description', 'User')->exists();
+        if (!$userRoleExists) {
+            Role::factory()->create(['description' => 'User']);
+        };
     }
 }

@@ -4,8 +4,9 @@ namespace Tests\Feature\API\Recipes;
 
 use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
+use App\Models\Role;
 use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Database\Seeders\RolesSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
@@ -21,6 +22,9 @@ class RecipesShowTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->seed(RolesSeeder::class);
+
         /** @var User $user */
         $user = User::factory()->create();
         $this->user = $user;
@@ -36,6 +40,7 @@ class RecipesShowTest extends TestCase
     /** @test */
     public function unnecessary_headers_hard_code_routes_repeated_potentially_local_variables(): void
     {
+        $this->seed(RolesSeeder::class);
         // 🛑 - unnecessary temporal variable
         /** @var User $user */
         $user = User::factory()->create();

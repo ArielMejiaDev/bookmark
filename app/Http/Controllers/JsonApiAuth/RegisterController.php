@@ -4,6 +4,7 @@ namespace App\Http\Controllers\JsonApiAuth;
 
 use App\Http\Controllers\JsonApiAuth\Traits\HasToShowApiTokens;
 use App\Http\Requests\JsonApiAuth\RegisterRequest;
+use App\Models\Role;
 use App\Notifications\JsonApiAuth\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\JsonResponse;
@@ -18,11 +19,17 @@ class RegisterController
     {
         try {
 
+            $roleId = Role::query()
+                ->where('description', 'User')
+                ->first()
+                ->id;
+
             /** @var User $user */
             $user = User::query()->create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'password' => Hash::make($request->get('password')),
+                'role_id' => $roleId,
             ]);
 
             if($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {

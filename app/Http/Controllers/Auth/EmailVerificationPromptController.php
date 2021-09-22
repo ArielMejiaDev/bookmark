@@ -20,7 +20,7 @@ class EmailVerificationPromptController extends Controller
         $role = $request->user()->role->description;
 
         return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(route(RouteServiceProvider::ROUTES_BY_ROLE[$role]) ?? RouteServiceProvider::HOME)
+                    ? redirect()->intended(route(RouteServiceProvider::ROUTES_BY_ROLE[$role]))
                     : Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
     }
 }

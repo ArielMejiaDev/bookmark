@@ -53,6 +53,6 @@ class RegisteredUserController extends Controller
 
         $role = $user->role->description;
 
-        return redirect(RouteServiceProvider::ROUTES_BY_ROLE[$role] ?? RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::ROUTES_BY_ROLE[$role]);
     }
 }

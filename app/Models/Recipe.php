@@ -45,6 +45,7 @@ class Recipe extends Model
     protected $casts = [
         'created_at' => 'date',
         'updated_at' => 'date',
+        'author_id' => 'integer',
     ];
 
     public function getPublishedAtAttribute(): string

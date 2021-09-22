@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\JsonApiAuth;
 
+use App\Models\Role;
 use App\Models\User;
+use Database\Seeders\RolesSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -38,11 +40,17 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
+        $roleId = Role::query()
+            ->where('description', 'User')
+            ->first()
+            ->id;
+
         $response = $this->post(route('json-api-auth.register'), [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'role_id' => $roleId,
         ]);
 
         $this->assertAuthenticated();
