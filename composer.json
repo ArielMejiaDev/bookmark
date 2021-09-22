@@ -16,6 +16,8 @@
     },
     "require-dev": {
         "arielmejiadev/json-api-auth": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.10",
+        "tutorigo/laravel-ide-macros": "*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.4",

@@ -18,7 +18,7 @@ Route::post('editors/login', APIEditorsLoginController::class)->name('api.editor
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::apiResource('manage/recipes', APIManageRecipesController::class, ['as' => 'manage']);
+    Route::apiResource('manage/recipes', APIManageRecipesController::class, ['as' => 'api.manage']);
 
     Route::get('recipes', APIRecipesController::class)->name('api.recipes.index');
 });

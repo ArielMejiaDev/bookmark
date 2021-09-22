@@ -30,7 +30,7 @@ class RecipeRequest extends FormRequest
             'title' => ['required', 'string', 'min:10'],
             'content' => ['required', 'string', 'max:5000'],
             'slug' => ['required', Rule::unique('recipes')],
-            'thumbnail' => ['nullable'],
+            'thumbnail' => ['nullable', 'image', 'max:1024'],
             'author_id' => ['required', Rule::exists('users', 'id')],
         ];
     }

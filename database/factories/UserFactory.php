@@ -46,4 +46,14 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function admin(): UserFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role_id' => Role::query()->where('description', 'admin')->select('id')->first()->id ??
+                    (Role::query()->create(['description' => 'Admin']))->id,
+            ];
+        });
+    }
 }

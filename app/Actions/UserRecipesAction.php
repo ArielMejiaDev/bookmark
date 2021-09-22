@@ -23,6 +23,7 @@ class UserRecipesAction
         $recipes = $user->recipes()
             ->select('id', 'title', 'content', 'author_id', 'created_at')
             ->orderByDesc('id')
+            ->with('author:id,name')
             ->get();
 
         return $recipes->append('published_at');
