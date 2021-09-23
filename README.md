@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://applaudostudios.com/static/full_logo-d699ecc3a0afe89470e36657d866f405.svg" width="400"></a></p>
 
 A repository with a sample application for "Testing an API" talk in Applaudo Developer Conference 2021.
 
