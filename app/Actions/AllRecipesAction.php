@@ -19,6 +19,6 @@ class AllRecipesAction
             ->select('id', 'title', 'author_id')
             ->orderByDesc('id')
             ->with('author:id,name')
-            ->get();
+            ->paginate();
     }
 }

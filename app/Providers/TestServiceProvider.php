@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\ServiceProvider;
 
 class TestServiceProvider extends ServiceProvider
@@ -20,9 +21,18 @@ class TestServiceProvider extends ServiceProvider
          * @instantiated
          */
         \Illuminate\Testing\TestResponse::macro('assertResource', function (\Illuminate\Http\Resources\Json\JsonResource $resource) {
-            $resource = ['data' => json_decode($resource->toJson(), 1)];
+
             /** @var \Illuminate\Testing\TestResponse $this */
-            $this->assertExactJson($resource);
+
+            if ($resource->resource instanceof AbstractPaginator) {
+                return $this->decodeResponseJson()
+                    ->assertSubset([
+                        'data' => json_decode($resource->toJson(), 1)
+                    ]);
+            }
+
+            $resource = ['data' => json_decode($resource->toJson(), 1)];
+            return $this->assertExactJson($resource);
         });
     }
 }

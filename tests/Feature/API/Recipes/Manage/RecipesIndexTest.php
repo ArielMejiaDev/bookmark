@@ -108,6 +108,7 @@ class RecipesIndexTest extends TestCase
                         ->whereType('title', 'string')
                         ->etc()
                 )
+            ->etc()
         );
     }
 
@@ -131,15 +132,16 @@ class RecipesIndexTest extends TestCase
 
             $response->assertJson(function(AssertableJson $json) use ($key, $recipe) {
                 $json->has("data.{$key}", fn (AssertableJson $json) =>
-                $json->where('id', $recipe->id)
-                    ->where('title', $recipe->title)
-                    ->where('content', $recipe->content)
-                    ->where('author', [
-                        'id' => $recipe->author->id,
-                        'name' => $recipe->author->name,
-                    ])
-                    ->etc()
-                );
+                    $json->where('id', $recipe->id)
+                        ->where('title', $recipe->title)
+                        ->where('content', $recipe->content)
+                        ->where('author', [
+                            'id' => $recipe->author->id,
+                            'name' => $recipe->author->name,
+                        ])
+                        ->etc()
+                    )
+                ->etc();
             });
 
         });
@@ -160,8 +162,8 @@ class RecipesIndexTest extends TestCase
         $recipes = Recipe::query()
             ->select(['id', 'title', 'author_id'])
             ->with('author')
-            ->get()
-            ->reverse();
+            ->orderByDesc('id')
+            ->paginate();
 
         // ✅ - Check all the response content and structure as an exact JSON
         // Easily, flexible and with a good performance.
