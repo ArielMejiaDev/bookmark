@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -31,7 +32,7 @@ class RecipeRequest extends FormRequest
             'content' => ['required', 'string', 'max:5000'],
             'slug' => ['required', Rule::unique('recipes')],
             'thumbnail' => ['nullable', 'image', 'max:1024'],
-            'author_id' => ['required', Rule::exists('users', 'id')],
+            'author_id' => ['required', 'integer', Rule::exists(User::class, 'id')],
         ];
     }
 }

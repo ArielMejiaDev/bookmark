@@ -35,6 +35,34 @@ class CreateRecipeTest extends TestCase
     }
 
     /** @test */
+    public function it_tests_a_non_authenticated_request_cannot_create_a_recipe(): void
+    {
+        $response = $this->postJson($this->route, [
+            'thumbnail' => 1
+        ]);
+
+        $response->assertStatus(401);
+
+        // 💎 Hidden Gem
+        // Use the class fqcn instead of a string with the name of the table, is flexible and avoid magic number issues
+        $this->assertDatabaseCount(Recipe::class, 0);
+    }
+
+    /** @test */
+    public function it_tests_a_non_authenticated_request_cannot_create_a_recipe_conveniently(): void
+    {
+        $response = $this->postJson($this->route, [
+                'thumbnail' => 1
+            ]);
+
+        // 💎 Hidden Gem
+        // Use this helper instead of hard coding response status code 401
+        $response->assertUnauthorized();
+
+        $this->assertDatabaseCount(Recipe::class, 0);
+    }
+
+    /** @test */
     public function it_tests_a_user_cannot_create_a_recipe_with_invalid_data(): void
     {
         $response = $this->actingAs($this->user)
@@ -44,8 +72,6 @@ class CreateRecipeTest extends TestCase
 
         $response->assertJsonValidationErrors($this->validationRules);
 
-        // 💎 Hidden Gem
-        // Use the class fqcn instead of a string with the name of the table, is flexible and avoid magic number issues
         $this->assertDatabaseCount(Recipe::class, 0);
     }
 
@@ -60,6 +86,8 @@ class CreateRecipeTest extends TestCase
         // 💎 Hidden Gem
         // This helper assert invalid fields no matter if the validation error comes from session or from an API
         $response->assertInvalid($this->validationRules);
+
+        $response->assertUnprocessable();
 
         $this->assertDatabaseCount(Recipe::class, 0);
     }
@@ -77,6 +105,8 @@ class CreateRecipeTest extends TestCase
         unset($this->validationRules[
             array_search('thumbnail', $this->validationRules)
         ]);
+
+        $response->assertUnprocessable();
 
         $response->assertInvalid($this->validationRules);
     }
@@ -128,7 +158,7 @@ class CreateRecipeTest extends TestCase
 
         $response = $this->actingAs($this->user)->postJson($this->route, $recipe);
 
-        $response->assertSuccessful();
+        $response->assertCreated();
 
         // 💎 Hidden Gem
         // It resolves automatically the standard table or the model protected property table

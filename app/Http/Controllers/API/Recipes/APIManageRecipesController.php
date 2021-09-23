@@ -39,8 +39,9 @@ class APIManageRecipesController extends Controller
         return RecipeResource::make($recipe->load('author:id,name'));
     }
 
-    public function destroy(Recipe $recipe): ?bool
+    public function destroy(Recipe $recipe): \Illuminate\Http\Response
     {
-        return $recipe->delete();
+        $recipe->delete();
+        return response()->noContent();
     }
 }

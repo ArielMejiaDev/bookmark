@@ -32,6 +32,6 @@ class RecipePolicy
 
     public function delete(User $user, Recipe $recipe): bool
     {
-        return $user->isAdmin() || $user->isEditor() || $user->id === (int) $recipe->author_id;
+        return $user->isAdmin() || $user->id === (int) $recipe->author_id;
     }
 }
